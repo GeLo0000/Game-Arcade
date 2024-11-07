@@ -1,2 +1,2 @@
-# Game-Arkade
+# Game-Arcade
  
