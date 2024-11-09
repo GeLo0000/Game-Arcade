@@ -1,0 +1,230 @@
+[gd_scene load_steps=22 format=3 uid="uid://bnbl88h2bsll8"]
+
+[ext_resource type="Script" path="res://Code/Menu/MainMenuController.gd" id="1_i1bpq"]
+[ext_resource type="Script" path="res://Code/Menu/PlayerMainMenu.gd" id="1_rc8bk"]
+[ext_resource type="Script" path="res://Code/Menu/ExitTrigger.gd" id="3_680xg"]
+[ext_resource type="Material" uid="uid://dsd37ggiocvo1" path="res://Assets/Materials/CameraShader.tres" id="3_emfi4"]
+[ext_resource type="Script" path="res://Code/Menu/PlayerHoverTrigger.gd" id="4_fo8l2"]
+[ext_resource type="Script" path="res://Code/Menu/DebugActivatable.gd" id="5_pvaer"]
+[ext_resource type="Script" path="res://Code/Menu/SceneChangeActivatable.gd" id="7_hg18i"]
+[ext_resource type="Script" path="res://Code/Menu/OutlineActivatable.gd" id="7_sy5as"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_38b2w"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vudkp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lupp7"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7i083"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kgh6s"]
+emission_enabled = true
+emission = Color(0.12549, 0.109804, 0.101961, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j28ed"]
+size = Vector3(1.5, 2.5, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trsu7"]
+size = Vector3(1.5, 2.5, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1c1sf"]
+emission_enabled = true
+emission = Color(0.937255, 1, 1, 1)
+emission_energy_multiplier = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_rfc14"]
+size = Vector3(1.5, 2.5, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ehs61"]
+size = Vector3(1.5, 2.5, 1.5)
+
+[sub_resource type="Environment" id="Environment_fqjuq"]
+background_energy_multiplier = 0.0
+tonemap_mode = 3
+tonemap_white = 16.0
+sdfgi_bounce_feedback = 0.11
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.505087, 0.540107, 0.59514, 1)
+fog_light_energy = 0.5
+fog_density = 0.015
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_hycfm"]
+
+[sub_resource type="Compositor" id="Compositor_cbrgk"]
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("1_i1bpq")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_rc8bk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_38b2w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_vudkp")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="Player/Camera3D"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -3)
+collision_mask = 2
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="StaticObjects" type="Node3D" parent="."]
+
+[node name="Walls" type="Node3D" parent="StaticObjects"]
+
+[node name="Floor" type="StaticBody3D" parent="StaticObjects/Walls"]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Walls/Floor"]
+shape = SubResource("BoxShape3D_lupp7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Walls/Floor"]
+mesh = SubResource("BoxMesh_7i083")
+
+[node name="Roof" type="StaticBody3D" parent="StaticObjects/Walls"]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 4.67935, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Walls/Roof"]
+shape = SubResource("BoxShape3D_lupp7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Walls/Roof"]
+mesh = SubResource("BoxMesh_7i083")
+
+[node name="Wall1" type="StaticBody3D" parent="StaticObjects/Walls"]
+transform = Transform3D(20, 0, 0, 0, 7, 0, 0, 0, 1, 0, 2, 10.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Walls/Wall1"]
+shape = SubResource("BoxShape3D_lupp7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Walls/Wall1"]
+mesh = SubResource("BoxMesh_7i083")
+
+[node name="Wall2" type="StaticBody3D" parent="StaticObjects/Walls"]
+transform = Transform3D(20, 0, 0, 0, 7, 0, 0, 0, 1, 0, 2, -10.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Walls/Wall2"]
+shape = SubResource("BoxShape3D_lupp7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Walls/Wall2"]
+mesh = SubResource("BoxMesh_7i083")
+
+[node name="Wall3" type="StaticBody3D" parent="StaticObjects/Walls"]
+transform = Transform3D(-8.74228e-07, 0, 1, 0, 7, 0, -20, 0, -4.37114e-08, 10.5, 2, -4.5897e-07)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Walls/Wall3"]
+shape = SubResource("BoxShape3D_lupp7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Walls/Wall3"]
+mesh = SubResource("BoxMesh_7i083")
+
+[node name="Wall4" type="StaticBody3D" parent="StaticObjects/Walls"]
+transform = Transform3D(-8.74228e-07, 0, 1, 0, 7, 0, -20, 0, -4.37114e-08, -10.5, 2, 4.5897e-07)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Walls/Wall4"]
+shape = SubResource("BoxShape3D_lupp7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Walls/Wall4"]
+mesh = SubResource("BoxMesh_7i083")
+
+[node name="ExitDoor" type="Node3D" parent="StaticObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, -9.9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/ExitDoor"]
+material_override = SubResource("StandardMaterial3D_kgh6s")
+mesh = SubResource("BoxMesh_j28ed")
+
+[node name="Label3D" type="Label3D" parent="StaticObjects/ExitDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000788927, 1.09716, 0.104732)
+text = "Exit"
+
+[node name="HoverTrigger" type="Area3D" parent="StaticObjects/ExitDoor"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("4_fo8l2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/ExitDoor/HoverTrigger"]
+shape = SubResource("BoxShape3D_trsu7")
+
+[node name="OutlineActivatable" type="Node" parent="StaticObjects/ExitDoor"]
+script = ExtResource("7_sy5as")
+
+[node name="ExitTrigger" type="Node" parent="StaticObjects/ExitDoor"]
+script = ExtResource("3_680xg")
+
+[node name="Arcades" type="Node3D" parent="StaticObjects"]
+
+[node name="FlappyBird" type="Node3D" parent="StaticObjects/Arcades"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.325, -9)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticObjects/Arcades/FlappyBird"]
+material_override = SubResource("StandardMaterial3D_1c1sf")
+mesh = SubResource("BoxMesh_rfc14")
+
+[node name="HoverTrigger" type="Area3D" parent="StaticObjects/Arcades/FlappyBird"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("4_fo8l2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticObjects/Arcades/FlappyBird/HoverTrigger"]
+shape = SubResource("BoxShape3D_ehs61")
+
+[node name="DebugActivatable" type="Node" parent="StaticObjects/Arcades/FlappyBird"]
+script = ExtResource("5_pvaer")
+
+[node name="OutlineActivatable" type="Node" parent="StaticObjects/Arcades/FlappyBird"]
+script = ExtResource("7_sy5as")
+
+[node name="Label3D" type="Label3D" parent="StaticObjects/Arcades/FlappyBird"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.76, 1, 0)
+text = "Flappy Bird
+"
+
+[node name="SceneChangeActivatable" type="Node" parent="StaticObjects/Arcades/FlappyBird"]
+script = ExtResource("7_hg18i")
+scene_name = &"G:/CODE/Godot/Projects/Game-Arcade/GameArcade/Scenes/Menu/TestScene.tscn"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_fqjuq")
+camera_attributes = SubResource("CameraAttributesPractical_hycfm")
+compositor = SubResource("Compositor_cbrgk")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 5, 4, 5)
+spot_range = 10.0
+spot_angle = 65.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -5, 4, 5)
+spot_range = 10.0
+spot_angle = 65.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 5, 4, -5)
+spot_range = 10.0
+spot_angle = 65.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -5, 4, -5)
+spot_range = 10.0
+spot_angle = 65.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = ExtResource("3_emfi4")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

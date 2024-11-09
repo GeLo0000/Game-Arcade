@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfg2olrbket1r"]
+
+[ext_resource type="Script" path="res://Code/Menu/SceneChangeButton.gd" id="1_dajgo"]
+
+[node name="TestScene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 1153.0
+offset_bottom = 650.0
+theme_override_font_sizes/normal_font_size = 72
+text = "Test Scene"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_top = 106.0
+offset_right = 392.0
+offset_bottom = 213.0
+text = "Back to menu"
+script = ExtResource("1_dajgo")
+scene_name = &"G:/CODE/Godot/Projects/Game-Arcade/GameArcade/Scenes/Menu/MainMenu.tscn"
