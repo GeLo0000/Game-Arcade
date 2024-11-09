@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bnbl88h2bsll8"]
+[gd_scene load_steps=23 format=3 uid="uid://bnbl88h2bsll8"]
 
 [ext_resource type="Script" path="res://Code/Menu/MainMenuController.gd" id="1_i1bpq"]
 [ext_resource type="Script" path="res://Code/Menu/PlayerMainMenu.gd" id="1_rc8bk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://dsd37ggiocvo1" path="res://Assets/Materials/CameraShader.tres" id="3_emfi4"]
 [ext_resource type="Script" path="res://Code/Menu/PlayerHoverTrigger.gd" id="4_fo8l2"]
 [ext_resource type="Script" path="res://Code/Menu/DebugActivatable.gd" id="5_pvaer"]
+[ext_resource type="Script" path="res://Code/Menu/HintActivatable.gd" id="6_3vit8"]
 [ext_resource type="Script" path="res://Code/Menu/SceneChangeActivatable.gd" id="7_hg18i"]
 [ext_resource type="Script" path="res://Code/Menu/OutlineActivatable.gd" id="7_sy5as"]
 
@@ -160,6 +161,9 @@ script = ExtResource("7_sy5as")
 [node name="ExitTrigger" type="Node" parent="StaticObjects/ExitDoor"]
 script = ExtResource("3_680xg")
 
+[node name="HintActivatable" type="Node" parent="StaticObjects/ExitDoor"]
+script = ExtResource("6_3vit8")
+
 [node name="Arcades" type="Node3D" parent="StaticObjects"]
 
 [node name="FlappyBird" type="Node3D" parent="StaticObjects/Arcades"]
@@ -191,6 +195,9 @@ text = "Flappy Bird
 [node name="SceneChangeActivatable" type="Node" parent="StaticObjects/Arcades/FlappyBird"]
 script = ExtResource("7_hg18i")
 scene_name = &"G:/CODE/Godot/Projects/Game-Arcade/GameArcade/Scenes/Menu/TestScene.tscn"
+
+[node name="HintActivatable" type="Node" parent="StaticObjects/Arcades/FlappyBird"]
+script = ExtResource("6_3vit8")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fqjuq")
@@ -228,3 +235,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="UseHint" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(100, 50)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -198.0
+offset_right = 50.0
+offset_bottom = -148.0
+grow_horizontal = 2
+grow_vertical = 0
+bbcode_enabled = true
+text = "[center][E] Use"
