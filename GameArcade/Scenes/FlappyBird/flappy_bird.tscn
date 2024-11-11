@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://bd1lrikps7chx"]
+
+[ext_resource type="Script" path="res://Scenes/FlappyBird/player_flappy.gd" id="1_aatbe"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_vge5m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2fcc"]
+size = Vector2(303, 73)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_olvju"]
+size = Vector2(63, 240)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oujji"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fqgf5"]
+radius = 18.0
+height = 52.0
+
+[node name="FlappyBird" type="Node2D"]
+
+[node name="Floor" type="Node2D" parent="."]
+position = Vector2(-169, -37)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Floor"]
+position = Vector2(322, 647)
+scale = Vector2(305, 74.375)
+mesh = SubResource("QuadMesh_vge5m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(322.5, 647.5)
+shape = SubResource("RectangleShape2D_a2fcc")
+
+[node name="Wall" type="Node2D" parent="."]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Wall"]
+position = Vector2(340.063, 526.375)
+scale = Vector2(63.875, 236.75)
+mesh = SubResource("QuadMesh_vge5m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(340.5, 526)
+shape = SubResource("RectangleShape2D_olvju")
+
+[node name="PlayerFlappy" type="CharacterBody2D" parent="."]
+position = Vector2(38, 313)
+script = ExtResource("1_aatbe")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="PlayerFlappy"]
+position = Vector2(0, 3.09944e-06)
+scale = Vector2(36, 26)
+mesh = SubResource("CapsuleMesh_oujji")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerFlappy"]
+shape = SubResource("CapsuleShape2D_fqgf5")

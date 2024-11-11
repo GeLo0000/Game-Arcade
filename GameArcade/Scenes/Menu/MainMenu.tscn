@@ -194,7 +194,6 @@ text = "Flappy Bird
 
 [node name="SceneChangeActivatable" type="Node" parent="StaticObjects/Arcades/FlappyBird"]
 script = ExtResource("7_hg18i")
-scene_name = &"G:/CODE/Godot/Projects/Game-Arcade/GameArcade/Scenes/Menu/TestScene.tscn"
 
 [node name="HintActivatable" type="Node" parent="StaticObjects/Arcades/FlappyBird"]
 script = ExtResource("6_3vit8")
