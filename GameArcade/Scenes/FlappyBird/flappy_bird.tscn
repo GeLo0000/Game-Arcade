@@ -1,101 +1,79 @@
-[gd_scene load_steps=9 format=3 uid="uid://bd1lrikps7chx"]
+[gd_scene load_steps=10 format=3 uid="uid://bd1lrikps7chx"]
 
-[ext_resource type="Script" path="res://Scenes/FlappyBird/walls.gd" id="1_2lovh"]
-[ext_resource type="Script" path="res://Scenes/FlappyBird/player_flappy.gd" id="1_aatbe"]
+[ext_resource type="Script" path="res://Code/FlappyBird/WallsController.gd" id="1_a84jo"]
+[ext_resource type="Script" path="res://Code/FlappyBird/player_flappy.gd" id="1_aatbe"]
+[ext_resource type="Script" path="res://Code/FlappyBird/WallsSpawner.gd" id="3_agrhf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a2fcc"]
-size = Vector2(1153.5, 73)
+size = Vector2(356.5, 73)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00bqi"]
-size = Vector2(66, 267)
+size = Vector2(65, 802)
 
 [sub_resource type="QuadMesh" id="QuadMesh_obxbv"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qub46"]
-size = Vector2(68, 360)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_oujji"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_me3v4"]
+size = Vector2(66, 138)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6xupa"]
 radius = 18.0
 height = 52.0
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oujji"]
+
 [node name="FlappyBird" type="Node2D"]
 
-[node name="Floor" type="Node2D" parent="."]
-position = Vector2(-169, -37)
+[node name="Floor" type="Area2D" parent="."]
+position = Vector2(179, 680)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Floor"]
-position = Vector2(322.5, 647.5)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/StaticBody2D"]
-position = Vector2(422.75, 72.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("RectangleShape2D_a2fcc")
 
 [node name="Walls" type="Node2D" parent="."]
-position = Vector2(-338, -74)
-script = ExtResource("1_2lovh")
+position = Vector2(1207, 320)
+script = ExtResource("1_a84jo")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="Walls"]
-position = Vector2(645, 1059.18)
+[node name="Up Wall" type="Area2D" parent="Walls"]
+position = Vector2(0, -468)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D3"]
-position = Vector2(22, -851.675)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Up Wall"]
 shape = SubResource("RectangleShape2D_00bqi")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Walls/StaticBody2D3"]
-position = Vector2(21.625, -851.175)
-scale = Vector2(66.75, 266)
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Walls/Up Wall"]
+scale = Vector2(65, 802)
 mesh = SubResource("QuadMesh_obxbv")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
-position = Vector2(322.5, 647.5)
+[node name="Down Wall" type="Area2D" parent="Walls"]
+position = Vector2(0, 472)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
-position = Vector2(357.75, -63.25)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Down Wall"]
 shape = SubResource("RectangleShape2D_00bqi")
 
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Walls/StaticBody2D"]
-position = Vector2(358, -62.125)
-scale = Vector2(65, 270.75)
+[node name="MeshInstance2D" type="MeshInstance2D" parent="Walls/Down Wall"]
+scale = Vector2(65, 802)
 mesh = SubResource("QuadMesh_obxbv")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="Walls"]
-position = Vector2(645, 1295)
+[node name="AreaToCrossing" type="Area2D" parent="Walls"]
+position = Vector2(1, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2"]
-position = Vector2(212, -1058)
-shape = SubResource("RectangleShape2D_qub46")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Walls/StaticBody2D2"]
-position = Vector2(212, -1058)
-scale = Vector2(67.5001, 359.75)
-mesh = SubResource("QuadMesh_obxbv")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="Walls"]
-position = Vector2(967.5, 1706.68)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4"]
-position = Vector2(-105.5, -1003.68)
-shape = SubResource("RectangleShape2D_00bqi")
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="Walls/StaticBody2D4"]
-position = Vector2(-105.5, -1003.68)
-scale = Vector2(67.5001, 267.5)
-mesh = SubResource("QuadMesh_obxbv")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/AreaToCrossing"]
+position = Vector2(-1, 2)
+shape = SubResource("RectangleShape2D_me3v4")
 
 [node name="PlayerFlappy" type="CharacterBody2D" parent="."]
-position = Vector2(38, 313)
+position = Vector2(162, 319)
 script = ExtResource("1_aatbe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerFlappy"]
+shape = SubResource("CapsuleShape2D_6xupa")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="PlayerFlappy"]
 scale = Vector2(36, 26)
 mesh = SubResource("CapsuleMesh_oujji")
 
-[node name="Area2D" type="Area2D" parent="PlayerFlappy"]
+[node name="WallsSpawner" type="Node" parent="."]
+script = ExtResource("3_agrhf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerFlappy/Area2D"]
-shape = SubResource("CapsuleShape2D_6xupa")
-
-[connection signal="area_shape_entered" from="PlayerFlappy/Area2D" to="PlayerFlappy" method="_on_area_2d_area_shape_entered"]
-[connection signal="body_entered" from="PlayerFlappy/Area2D" to="PlayerFlappy" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Walls/Up Wall" to="Walls" method="_on_up_wall_body_entered"]
+[connection signal="body_entered" from="Walls/Down Wall" to="Walls" method="_on_down_wall_body_entered"]
+[connection signal="body_exited" from="Walls/AreaToCrossing" to="Walls" method="_on_area_to_crossing_body_exited"]
